@@ -2,6 +2,7 @@ package fiber
 
 import (
 	"context"
+	"time"
 
 	"github.com/goccy/go-json"
 	"github.com/gofiber/template/html/v2"
@@ -81,7 +82,7 @@ func useFiber(
 			return nil
 		},
 		OnStop: func(ctx context.Context) error {
-			if err := app.Shutdown(); err != nil {
+			if err := app.ShutdownWithTimeout(time.Second); err != nil {
 				logger.Fatal(err.Error())
 			}
 			return nil
